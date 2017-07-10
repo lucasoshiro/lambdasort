@@ -119,11 +119,14 @@ def partition(A):
     p = LAMBDA_CAR(A)
     L, R = LAMBDA_EMPTY, LAMBDA_EMPTY
 
-    for x in lliterator(LAMBDA_CDR(A)):
+    S = LAMBDA_CDR(A)
+    while l2b(LAMBDA_NOT(LAMBDA_ISEMPTY(S))):
+        x = LAMBDA_CAR(S)
         if l2b(LAMBDA_LESS(x)(p)):
             L, R = LAMBDA_CONS(x)(L), R
         else:
             L, R = L, LAMBDA_CONS(x)(R)
+        S = LAMBDA_CDR(S)
 
     L, R = L, LAMBDA_CONS(p)(R)
 
