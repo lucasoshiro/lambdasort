@@ -123,8 +123,10 @@ def partition(A):
             else: R = LAMBDA_CONS(x)(R)
             return LAMBDA_CONS(L)(R)
 
-        LR = _partition2(LAMBDA_CAR(S), L, R)
-        return _partition(LAMBDA_CDR(S), LAMBDA_CAR(LR), LAMBDA_CDR(LR))
+        def _partition3(S, LR):
+            return _partition(LAMBDA_CDR(S), LAMBDA_CAR(LR), LAMBDA_CDR(LR))
+        
+        return _partition3(S, _partition2(LAMBDA_CAR(S), L, R))
 
     LR = _partition(S, L, R)
     L = LAMBDA_CAR(LR)
