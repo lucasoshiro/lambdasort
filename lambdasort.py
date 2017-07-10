@@ -35,6 +35,10 @@ LAMBDA_CONS = lambda a: lambda b: lambda l: l(a)(b)
 LAMBDA_CAR = lambda p: p(lambda a: lambda b: a)
 LAMBDA_CDR = lambda p: p(lambda a: lambda b: b)
 
+#list constants
+LAMBDA_EMPTY = LAMBDA_FALSE
+LAMBDA_ISEMPTY = lambda l: l(lambda h: lambda t: lambda d: LAMBDA_FALSE)(LAMBDA_TRUE)
+
 #boolean conversion
 def l2b(l):
     return l(True)(False)
@@ -65,6 +69,15 @@ def l2p(l):
 
 def p2l(p):
     return LAMBDA_CONS(p[0])(p[1])
+
+#list conversion
+def ll2pl(l):
+    if l2b(LAMBDA_ISEMPTY(l)): return []
+    return [LAMBDA_CAR(l)] + ll2pl(LAMBDA_CDR(l))
+
+def pl2ll(l):
+    if len(l) == 0: return LAMBDA_EMPTY
+    return LAMBDA_CONS(l[0])(pl2ll(l[1:]))
 
 #list operators
 def car(A):
