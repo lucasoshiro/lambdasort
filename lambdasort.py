@@ -100,11 +100,10 @@ def quicksort(A):
 
     LR = partition(A)
     L = LAMBDA_CAR(LR)
-    p = LAMBDA_CAR(LAMBDA_CDR(LR))
     sL = quicksort(L)
     sR = quicksort(LAMBDA_CDR(LAMBDA_CDR(LR)))
 
-    return LAMBDA_CONCAT(sL)(LAMBDA_CONS(p)(sR))
+    return LAMBDA_CONCAT(sL)(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(sR))
 
 def partition_wrapper(A):
     B = pl2ll(list(map(i2l, A)))
