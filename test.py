@@ -45,5 +45,9 @@ class TestLambdasort(unittest.TestCase):
         self.assertFalse(l2b(LAMBDA_NOT(b2l(True))))
         self.assertTrue(l2b(LAMBDA_NOT(b2l(False))))
 
+    def test_LAMBDA_IF(self):
+        self.assertTrue(l2b(LAMBDA_IF(b2l(True))(LAMBDA_TRUE)(LAMBDA_FALSE)))
+        self.assertFalse(l2b(LAMBDA_IF(b2l(False))(LAMBDA_TRUE)(LAMBDA_FALSE)))
+
 if __name__ == '__main__':
     unittest.main()
