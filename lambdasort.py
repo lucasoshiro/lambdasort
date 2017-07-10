@@ -4,6 +4,11 @@
 LAMBDA_TRUE = lambda a, b: a
 LAMBDA_FALSE = lambda a, b: b
 
+#boolean opearations
+LAMBDA_OR = lambda a, b: a(LAMBDA_TRUE, b)
+LAMBDA_AND = lambda a, b: a(b, LAMBDA_FALSE)
+LAMBDA_NOT = lambda a: a(LAMBDA_FALSE, LAMBDA_TRUE)
+
 #integer constants
 LAMBDA_ZERO = lambda p: lambda x: x
 LAMBDA_ONE = lambda p: lambda x: p(x)
@@ -14,6 +19,7 @@ LAMBDA_INCREMENT = lambda l: lambda p: lambda x: p(l(p)(x))
 LAMBDA_DECREMENT = lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)
 LAMBDA_ADD = lambda m, n: n(LAMBDA_INCREMENT)(m)
 LAMBDA_SUB = lambda m, n: n(LAMBDA_DECREMENT)(m)
+
 
 #boolean conversion
 def l2b(l):
