@@ -75,6 +75,12 @@ def pl2ll(l):
     if len(l) == 0: return LAMBDA_EMPTY
     return LAMBDA_CONS(l[0])(pl2ll(l[1:]))
 
+#list iterator
+def lliterator(l):
+    while not l2b(LAMBDA_EMPTY(l)):
+        yield LAMBDA_CAR(l)
+        l = LAMBDA_CDR(l)
+
 #list operators
 def car(A):
     return A[0]
