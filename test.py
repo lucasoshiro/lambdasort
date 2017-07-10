@@ -14,7 +14,7 @@ class TestLambdasort(unittest.TestCase):
 
     def test_partition(self):
         lst = [3, 9, 1, 5, 0, 5, 7, 9, 0, 4]
-        left, right = partition(lst)
+        left, right = partition_wrapper(lst)
         p = car(right)
         self.assertEqual(list(filter(lambda x: x < p, left)), left)
         self.assertEqual(list(filter(lambda x: x >= p, right)), right)
@@ -70,14 +70,21 @@ class TestLambdasort(unittest.TestCase):
         self.assertTrue(l2b(LAMBDA_EQZ(i2l(0))))
         self.assertFalse(l2b(LAMBDA_EQZ(i2l(1))))
 
-    def test_LAMBDA_LEZ(self):
-        self.assertTrue(l2b(LAMBDA_LEZ(i2l(0))(i2l(0))))
-        self.assertTrue(l2b(LAMBDA_LEZ(i2l(0))(i2l(42))))
-        self.assertFalse(l2b(LAMBDA_LEZ(i2l(42))(i2l(0))))
+    def test_LAMBDA_LEQ(self):
+        self.assertTrue(l2b(LAMBDA_LEQ(i2l(10))(i2l(10))))
+        self.assertTrue(l2b(LAMBDA_LEQ(i2l(10))(i2l(42))))
+        self.assertFalse(l2b(LAMBDA_LEQ(i2l(42))(i2l(10))))
 
-    def test_LAMBDA_LTZ(self):
-        pass
-    
+    def test_LAMBDA_EQ(self):
+        self.assertTrue(l2b(LAMBDA_EQ(LAMBDA_ONE)(LAMBDA_ONE)))
+        self.assertFalse(l2b(LAMBDA_EQ(LAMBDA_ONE)(LAMBDA_ZERO)))
+        self.assertFalse(l2b(LAMBDA_EQ(LAMBDA_ONE)(LAMBDA_TWO)))
+
+    def test_LAMBDA_LESS(self):
+        self.assertFalse(l2b(LAMBDA_LESS(i2l(10))(i2l(10))))
+        self.assertTrue(l2b(LAMBDA_LESS(i2l(10))(i2l(42))))
+        self.assertFalse(l2b(LAMBDA_LESS(i2l(42))(i2l(10))))
+
     def test_llist2pylist(self):
         self.assertEqual(llist2pylist([LAMBDA_ZERO, LAMBDA_ONE, LAMBDA_TWO]),
                          [0, 1, 2])

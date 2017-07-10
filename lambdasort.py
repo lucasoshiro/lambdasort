@@ -22,7 +22,9 @@ LAMBDA_SUB = lambda m: lambda n: n(LAMBDA_DECREMENT)(m)
 
 #comparators
 LAMBDA_EQZ = lambda n: n(lambda x: LAMBDA_FALSE)(LAMBDA_TRUE)
-LAMBDA_LEZ = lambda m: lambda n: LAMBDA_EQZ(LAMBDA_SUB(m)(n))
+LAMBDA_LEQ = lambda m: lambda n: LAMBDA_EQZ(LAMBDA_SUB(m)(n))
+LAMBDA_EQ = lambda m: lambda n: LAMBDA_AND(LAMBDA_LEQ(m)(n))(LAMBDA_LEQ(n)(m))
+LAMBDA_LESS = lambda m: lambda n: LAMBDA_AND(LAMBDA_LEQ(m)(n))(LAMBDA_NOT(LAMBDA_EQ(m)(n)))
 
 #boolean conversion
 def l2b(l):
@@ -67,14 +69,16 @@ def quicksort_wrapper(A):
 
 def quicksort(A):
     if len(A) <= 1: return A
-    L, R = partition(A)
+    L, R = partition_wrapper(A)
     p = car(R)
     L = quicksort(L)
     R = quicksort(cdr(R))
     return concat(L, concat([p], R))
 
 def partition_wrapper(A):
-    pass
+    B = pylist2llist(A)
+    L, R = partition(B)
+    return llist2pylist(L), llist2pylist(R)
 
 def partition(A):
     p = car(A)
@@ -82,7 +86,7 @@ def partition(A):
     R = []
 
     for x in cdr(A):
-        if x < p: L = insert(L, x)
+        if l2b(LAMBDA_LESS(x)(p)): L = insert(L, x)
         else: R = insert(R, x)
 
     R = insert(R, p)
