@@ -117,9 +117,6 @@ def partition_wrapper(A):
 
 def partition(A):
     p = LAMBDA_CAR(A)
-    L, R = LAMBDA_EMPTY, LAMBDA_EMPTY
-
-    S = LAMBDA_CDR(A)
 
     def _partition(S, L, R):
         if l2b(LAMBDA_ISEMPTY(S)): return LAMBDA_CONS(L)(R)
@@ -131,10 +128,7 @@ def partition(A):
             return _partition(LAMBDA_CDR(S), LAMBDA_CAR(LR), LAMBDA_CDR(LR))
 
         return _partition3(S, _partition2(LAMBDA_CAR(S)))
-    
-    LR = _partition(S, L, R)
-    L, R = LAMBDA_CAR(LR), LAMBDA_CDR(LR)
 
-    L, R = L, LAMBDA_CONS(p)(R)
+    LR = _partition(LAMBDA_CDR(A), LAMBDA_EMPTY, LAMBDA_EMPTY)
 
-    return LAMBDA_CONS(L)(R)
+    return LAMBDA_CONS(LAMBDA_CAR(LR))(LAMBDA_CONS(p)(LAMBDA_CDR(LR)))
