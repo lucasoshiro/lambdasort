@@ -18,7 +18,7 @@ class TestLambdasort(unittest.TestCase):
     def test_partition(self):
         lst = [3, 9, 1, 5, 0, 5, 7, 9, 0, 4]
         left, right = partition_wrapper(lst)
-        p = car(right)
+        p = right[0]
         self.assertEqual(list(filter(lambda x: x < p, left)), left)
         self.assertEqual(list(filter(lambda x: x >= p, right)), right)
         self.assertEqual(len(left) + len(right), len(lst))

@@ -88,19 +88,6 @@ def lliterator(l):
         yield LAMBDA_CAR(l)
         l = LAMBDA_CDR(l)
 
-#list operators
-def car(A):
-    return A[0]
-
-def cdr(A):
-    return A[1:]
-
-def cons(x, A):
-    return [x] + A
-
-def concat(A, B):
-    return A + B
-
 #quicksort
 def quicksort_wrapper(A):
     church = pl2ll([i2l(x) for x in A])
