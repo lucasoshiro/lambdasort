@@ -7,7 +7,7 @@ from functools import reduce
 
 class TestLambdasort(unittest.TestCase):
     def test_sorting(self):
-        l = [randint(0, 1000) for i in range(0, 1000)]
+        l = [randint(0, 50) for i in range(0, 50)]
         control = sorted(l)
         l2 = quicksort_wrapper(l)
         self.assertEqual(control, l2)

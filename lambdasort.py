@@ -65,7 +65,7 @@ def concat(A, B):
 
 #quicksort
 def quicksort_wrapper(A):
-    return sorted(A)
+    return quicksort(A)
 
 def quicksort(A):
     if len(A) <= 1: return A
