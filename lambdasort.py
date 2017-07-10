@@ -122,9 +122,5 @@ def partition(A):
         return _partition3(S, _partition2(LAMBDA_CAR(S), L, R, p), p)
 
     LR = _partition(LAMBDA_CDR(A), LAMBDA_EMPTY, LAMBDA_EMPTY, LAMBDA_CAR(A))
-    L = LAMBDA_CAR(LR)
-    R = LAMBDA_CDR(LR)
 
-    R = LAMBDA_CONS(LAMBDA_CAR(A))(R)
-
-    return LAMBDA_CONS(L)(R)
+    return LAMBDA_CONS(LAMBDA_CAR(LR))(LAMBDA_CONS(LAMBDA_CAR(A))(LAMBDA_CDR(LR)))
