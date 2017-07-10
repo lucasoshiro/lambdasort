@@ -57,7 +57,7 @@ def car(A):
 def cdr(A):
     return A[1:]
 
-def insert(A, x):
+def cons(A, x):
     return [x] + A
 
 def concat(A, B):
@@ -86,9 +86,9 @@ def partition(A):
     R = []
 
     for x in cdr(A):
-        if l2b(LAMBDA_LESS(x)(p)): L = insert(L, x)
-        else: R = insert(R, x)
+        if l2b(LAMBDA_LESS(x)(p)): L = cons(L, x)
+        else: R = cons(R, x)
 
-    R = insert(R, p)
+    R = cons(R, p)
 
     return L, R
