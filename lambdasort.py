@@ -9,6 +9,9 @@ LAMBDA_OR = lambda a: lambda b: a(LAMBDA_TRUE)(b)
 LAMBDA_AND = lambda a: lambda b: a(b)(LAMBDA_FALSE)
 LAMBDA_NOT = lambda a: a(LAMBDA_FALSE)(LAMBDA_TRUE)
 
+#if
+LAMBDA_IF = lambda c: lambda t: lambda e: c(t)(e)
+
 #integer constants
 LAMBDA_ZERO = lambda p: lambda x: x
 LAMBDA_ONE = lambda p: lambda x: p(x)
