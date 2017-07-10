@@ -98,10 +98,9 @@ def quicksort(A):
     if l2b(LAMBDA_ISEMPTY(A)): return A
     if l2b(LAMBDA_ISEMPTY(LAMBDA_CDR(A))): return A
 
-    def _quicksort(A, LR):
-        return LAMBDA_CONCAT(quicksort(LAMBDA_CAR(LR)))(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(quicksort(LAMBDA_CDR(LAMBDA_CDR(LR)))))
+    _quicksort = lambda A: lambda LR: LAMBDA_CONCAT(quicksort(LAMBDA_CAR(LR)))(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(quicksort(LAMBDA_CDR(LAMBDA_CDR(LR)))))
     
-    return _quicksort(A, partition(A))
+    return _quicksort(A)(partition(A))
 
 def partition_wrapper(A):
     B = pl2ll(list(map(i2l, A)))
