@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 
+LAMBDA_TRUE = lambda a, b: a
+LAMBDA_FALSE = lambda a, b: b
+
+def l2b(l):
+    return l(True, False)
+
+def b2l(b):
+    return LAMBDA_TRUE if b else LAMBDA_FALSE
+
 def car(A):
     return A[0]
 

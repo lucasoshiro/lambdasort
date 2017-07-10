@@ -20,7 +20,14 @@ class TestLambdasort(unittest.TestCase):
         self.assertEqual(list(filter(lambda x: x >= p, right)), right)
         self.assertEqual(len(left) + len(right), len(lst))
         self.assertEqual(sorted(left + right), sorted(lst))
-        
+
+    def test_l2b(self):
+        self.assertEqual(l2b(LAMBDA_TRUE), True)
+        self.assertEqual(l2b(LAMBDA_FALSE), False)
+
+    def test_b2l(self):
+        self.assertEqual(l2b(b2l(True)), True)
+        self.assertEqual(l2b(b2l(False)), False)
 
 if __name__ == '__main__':
     unittest.main()
