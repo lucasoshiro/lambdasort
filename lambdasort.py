@@ -79,6 +79,12 @@ def pl2ll(l):
     if len(l) == 0: return LAMBDA_EMPTY
     return LAMBDA_CONS(l[0])(pl2ll(l[1:]))
 
+#list iterator
+def lliterator(l):
+    while not l2b(LAMBDA_ISEMPTY(l)):
+        yield LAMBDA_CAR(l)
+        l = LAMBDA_CDR(l)
+
 #list operators
 def car(A):
     return A[0]
@@ -98,9 +104,9 @@ def quicksort_wrapper(A):
 
 def quicksort(A):
     if len(A) <= 1: return A
-    LR = partition(A)
-    L = LAMBDA_CAR(LR)
-    R = LAMBDA_CDR(LR)
+    LR = partition(pl2ll(A))
+    L = ll2pl(LAMBDA_CAR(LR))
+    R = ll2pl(LAMBDA_CDR(LR))
     p = car(R)
 
     L = quicksort(L)
@@ -108,23 +114,22 @@ def quicksort(A):
     return concat(L, concat([p], R))
 
 def partition_wrapper(A):
-    B = pylist2llist(A)
+    B = pl2ll(list(map(i2l, A)))
     LR = partition(B)
     L = LAMBDA_CAR(LR)
     R = LAMBDA_CDR(LR)
-    return llist2pylist(L), llist2pylist(R)
+    return list(map(l2i, ll2pl(L))), list(map(l2i, ll2pl(R)))
 
 def partition(A):
-    p = car(A)
+    p = LAMBDA_CAR(A)
+    L, R = LAMBDA_EMPTY, LAMBDA_EMPTY
 
-    L, R = [], []
-
-    for x in cdr(A):
+    for x in lliterator(LAMBDA_CDR(A)):
         if l2b(LAMBDA_LESS(x)(p)):
-            L, R = cons(x, L), R
+            L, R = LAMBDA_CONS(x)(L), R
         else:
-            L, R = L, cons(x, R)
+            L, R = L, LAMBDA_CONS(x)(R)
 
-    L, R = L, cons(p, R)
+    L, R = L, LAMBDA_CONS(p)(R)
 
     return LAMBDA_CONS(L)(R)
