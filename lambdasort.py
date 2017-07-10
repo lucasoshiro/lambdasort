@@ -99,10 +99,7 @@ def quicksort(A):
     if l2b(LAMBDA_ISEMPTY(LAMBDA_CDR(A))): return A
 
     def _quicksort(A, LR):
-        sL = quicksort(LAMBDA_CAR(LR))
-        sR = quicksort(LAMBDA_CDR(LAMBDA_CDR(LR)))
-
-        return LAMBDA_CONCAT(sL)(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(sR))
+        return LAMBDA_CONCAT(quicksort(LAMBDA_CAR(LR)))(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(quicksort(LAMBDA_CDR(LAMBDA_CDR(LR)))))
     
     return _quicksort(A, partition(A))
 
