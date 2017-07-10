@@ -101,6 +101,14 @@ class TestLambdasort(unittest.TestCase):
         self.assertEqual(list(map(l2i, l2p(p2l([i2l(20), i2l(30)])))),
                          [20, 30])
 
+    def test_LAMBDA_CONCAT(self):
+        l1 = [1, 1, 2, 3]
+        l2 = [5, 8, 13, 21]
+        self.assertEqual(list(map(l2i, ll2pl(LAMBDA_CONCAT(
+            pl2ll(list(map(i2l, l1))))(
+            pl2ll(list(map(i2l, l2))))))),
+            l1 + l2)
+
     def test_ll2pl(self):
         self.assertEqual(list(map(l2i, ll2pl
             (LAMBDA_CONS(i2l(10))(
