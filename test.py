@@ -30,16 +30,16 @@ class TestLambdasort(unittest.TestCase):
         self.assertEqual(l2b(b2l(False)), False)
 
     def test_LAMBDA_OR(self):
-        self.assertTrue(l2b(LAMBDA_OR(b2l(False), b2l(True))))
-        self.assertTrue(l2b(LAMBDA_OR(b2l(True), b2l(False))))
-        self.assertTrue(l2b(LAMBDA_OR(b2l(True), b2l(True))))
-        self.assertFalse(l2b(LAMBDA_OR(b2l(False), b2l(False))))
+        self.assertTrue(l2b(LAMBDA_OR(b2l(False))(b2l(True))))
+        self.assertTrue(l2b(LAMBDA_OR(b2l(True))(b2l(False))))
+        self.assertTrue(l2b(LAMBDA_OR(b2l(True))(b2l(True))))
+        self.assertFalse(l2b(LAMBDA_OR(b2l(False))(b2l(False))))
         
     def test_LAMBDA_AND(self):
-        self.assertFalse(l2b(LAMBDA_AND(b2l(False), b2l(True))))
-        self.assertFalse(l2b(LAMBDA_AND(b2l(True), b2l(False))))
-        self.assertTrue(l2b(LAMBDA_AND(b2l(True), b2l(True))))
-        self.assertFalse(l2b(LAMBDA_AND(b2l(False), b2l(False))))
+        self.assertFalse(l2b(LAMBDA_AND(b2l(False))(b2l(True))))
+        self.assertFalse(l2b(LAMBDA_AND(b2l(True))(b2l(False))))
+        self.assertTrue(l2b(LAMBDA_AND(b2l(True))(b2l(True))))
+        self.assertFalse(l2b(LAMBDA_AND(b2l(False))(b2l(False))))
 
     def test_LAMBDA_NOT(self):
         self.assertFalse(l2b(LAMBDA_NOT(b2l(True))))

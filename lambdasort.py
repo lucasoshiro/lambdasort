@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
 #boolean constants
-LAMBDA_TRUE = lambda a, b: a
-LAMBDA_FALSE = lambda a, b: b
+LAMBDA_TRUE = lambda a: lambda b: a
+LAMBDA_FALSE = lambda a: lambda b: b
 
 #boolean opearations
-LAMBDA_OR = lambda a, b: a(LAMBDA_TRUE, b)
-LAMBDA_AND = lambda a, b: a(b, LAMBDA_FALSE)
-LAMBDA_NOT = lambda a: a(LAMBDA_FALSE, LAMBDA_TRUE)
+LAMBDA_OR = lambda a: lambda b: a(LAMBDA_TRUE)(b)
+LAMBDA_AND = lambda a: lambda b: a(b)(LAMBDA_FALSE)
+LAMBDA_NOT = lambda a: a(LAMBDA_FALSE)(LAMBDA_TRUE)
 
 #integer constants
 LAMBDA_ZERO = lambda p: lambda x: x
@@ -23,7 +23,7 @@ LAMBDA_SUB = lambda m, n: n(LAMBDA_DECREMENT)(m)
 
 #boolean conversion
 def l2b(l):
-    return l(True, False)
+    return l(True)(False)
 
 def b2l(b):
     return LAMBDA_TRUE if b else LAMBDA_FALSE
