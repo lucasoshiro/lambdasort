@@ -110,14 +110,15 @@ def partition_wrapper(A):
     return list(map(l2i, ll2pl(L))), list(map(l2i, ll2pl(R)))
 
 def partition(A):
+    _partition2 = lambda x: lambda L: lambda R: lambda p: LAMBDA_IF(LAMBDA_LESS(x)(p))(LAMBDA_CONS(LAMBDA_CONS(x)(L))(R))(LAMBDA_CONS(L)(LAMBDA_CONS(x)(R)))
+
+    _partition3 = lambda S: lambda LR: lambda p: _partition(LAMBDA_CDR(S), LAMBDA_CAR(LR), LAMBDA_CDR(LR), p)
+        
+
     def _partition(S, L, R, p):
         if l2b(LAMBDA_ISEMPTY(S)): return LAMBDA_CONS(L)(R)
 
-        _partition2 = lambda x: lambda p: LAMBDA_CONS(LAMBDA_CONS(x)(L))(R) if l2b(LAMBDA_LESS(x)(p)) else LAMBDA_CONS(L)(LAMBDA_CONS(x)(R))
-
-        _partition3 = lambda S: lambda LR: lambda p: _partition(LAMBDA_CDR(S), LAMBDA_CAR(LR), LAMBDA_CDR(LR), p)
-
-        return _partition3(S)(_partition2(LAMBDA_CAR(S))(p))(p)
+        return _partition3(S)(_partition2(LAMBDA_CAR(S))(L)(R)(p))(p)
 
     _partition4 = (lambda A: lambda LR: LAMBDA_CONS(LAMBDA_CAR(LR))(LAMBDA_CONS(LAMBDA_CAR(A))(LAMBDA_CDR(LR))))(A)
 
