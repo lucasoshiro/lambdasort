@@ -12,6 +12,8 @@ LAMBDA_TWO = lambda p: lambda x: p(p(x))
 #integer operations
 LAMBDA_INCREMENT = lambda l: lambda p: lambda x: p(l(p)(x))
 LAMBDA_DECREMENT = lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)
+LAMBDA_ADD = lambda m, n: n(LAMBDA_INCREMENT)(m)
+LAMBDA_SUB = lambda m, n: n(LAMBDA_DECREMENT)(m)
 
 #boolean conversion
 def l2b(l):
