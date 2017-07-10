@@ -95,8 +95,6 @@ class TestLambdasort(unittest.TestCase):
 
     def test_pylist2llist(self):
         self.assertEqual(llist2pylist(pylist2llist([0, 1, 2])), [0, 1, 2])
-=======
->>>>>>> recreating-booleans
 
 if __name__ == '__main__':
     unittest.main()
