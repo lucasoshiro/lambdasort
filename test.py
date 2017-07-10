@@ -105,10 +105,10 @@ class TestLambdasort(unittest.TestCase):
         self.assertEqual(list(map(l2i, ll2pl(pl2ll(list(map(i2l, [11, 22, 33])))))),
                          [11, 22, 33])
 
-    def lliterator(self):
+    def test_lliterator(self):
         l = [11, 22, 33, 44, 55]
         ll = pl2ll(list(map(i2l, l)))
-        self.assertEqual(list(lliterator(ll)), l)
+        self.assertEqual(list(map(l2i, lliterator(ll))), l)
 
     def test_llist2pylist(self):
         self.assertEqual(llist2pylist([LAMBDA_ZERO, LAMBDA_ONE, LAMBDA_TWO]),
