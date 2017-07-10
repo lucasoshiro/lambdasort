@@ -93,6 +93,14 @@ class TestLambdasort(unittest.TestCase):
         self.assertTrue(l2b(LAMBDA_LESS(i2l(10))(i2l(42))))
         self.assertFalse(l2b(LAMBDA_LESS(i2l(42))(i2l(10))))
 
+    def test_l2p(self):
+        self.assertEqual(list(map(l2i, l2p(LAMBDA_CONS(i2l(20))(i2l(30))))),
+                         [20, 30])
+
+    def test_p2l(self):
+        self.assertEqual(list(map(l2i, l2p(p2l([i2l(20), i2l(30)])))),
+                         [20, 30])
+
     def test_llist2pylist(self):
         self.assertEqual(llist2pylist([LAMBDA_ZERO, LAMBDA_ONE, LAMBDA_TWO]),
                          [0, 1, 2])

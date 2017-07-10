@@ -30,6 +30,11 @@ LAMBDA_LEQ = lambda m: lambda n: LAMBDA_EQZ(LAMBDA_SUB(m)(n))
 LAMBDA_EQ = lambda m: lambda n: LAMBDA_AND(LAMBDA_LEQ(m)(n))(LAMBDA_LEQ(n)(m))
 LAMBDA_LESS = lambda m: lambda n: LAMBDA_AND(LAMBDA_LEQ(m)(n))(LAMBDA_NOT(LAMBDA_EQ(m)(n)))
 
+#pair operations
+LAMBDA_CONS = lambda a: lambda b: lambda l: l(a)(b)
+LAMBDA_CAR = lambda p: p(lambda a: lambda b: a)
+LAMBDA_CDR = lambda p: p(lambda a: lambda b: b)
+
 #boolean conversion
 def l2b(l):
     return l(True)(False)
@@ -53,6 +58,13 @@ def llist2pylist(L):
 
 def pylist2llist(L):
     return list(map(i2l, L))
+
+#pair conversion
+def l2p(l):
+    return [LAMBDA_CAR(l), LAMBDA_CDR(l)]
+
+def p2l(p):
+    return LAMBDA_CONS(p[0])(p[1])
 
 #list operators
 def car(A):
