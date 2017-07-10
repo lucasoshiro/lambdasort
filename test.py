@@ -29,5 +29,15 @@ class TestLambdasort(unittest.TestCase):
         self.assertEqual(l2b(b2l(True)), True)
         self.assertEqual(l2b(b2l(False)), False)
 
+    def test_l2i(self):
+        self.assertEqual(l2i(LAMBDA_ZERO), 0)
+        self.assertEqual(l2i(LAMBDA_ONE), 1)
+        self.assertEqual(l2i(LAMBDA_TWO), 2)
+
+    def test_i2l(self):
+        n = 42
+        self.assertEqual(l2i(i2l(n)), n)
+
+
 if __name__ == '__main__':
     unittest.main()
