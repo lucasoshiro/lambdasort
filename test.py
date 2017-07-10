@@ -45,6 +45,10 @@ class TestLambdasort(unittest.TestCase):
         self.assertFalse(l2b(LAMBDA_NOT(b2l(True))))
         self.assertTrue(l2b(LAMBDA_NOT(b2l(False))))
 
+    def test_LAMBDA_IF(self):
+        self.assertTrue(l2b(LAMBDA_IF(b2l(True))(LAMBDA_TRUE)(LAMBDA_FALSE)))
+        self.assertFalse(l2b(LAMBDA_IF(b2l(False))(LAMBDA_TRUE)(LAMBDA_FALSE)))
+
     def test_l2i(self):
         self.assertEqual(l2i(LAMBDA_ZERO), 0)
         self.assertEqual(l2i(LAMBDA_ONE), 1)
@@ -91,6 +95,8 @@ class TestLambdasort(unittest.TestCase):
 
     def test_pylist2llist(self):
         self.assertEqual(llist2pylist(pylist2llist([0, 1, 2])), [0, 1, 2])
+=======
+>>>>>>> recreating-booleans
 
 if __name__ == '__main__':
     unittest.main()
