@@ -100,11 +100,9 @@ def quicksort(A):
 
     LR = partition(A)
     L = LAMBDA_CAR(LR)
-    R = LAMBDA_CDR(LR)
-
-    p = LAMBDA_CAR(R)
+    p = LAMBDA_CAR(LAMBDA_CDR(LR))
     sL = quicksort(L)
-    sR = quicksort(LAMBDA_CDR(R))
+    sR = quicksort(LAMBDA_CDR(LAMBDA_CDR(LR)))
 
     return LAMBDA_CONCAT(sL)(LAMBDA_CONS(p)(sR))
 
