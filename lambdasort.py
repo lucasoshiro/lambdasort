@@ -40,14 +40,7 @@ LAMBDA_EMPTY = LAMBDA_FALSE
 LAMBDA_ISEMPTY = lambda l: l(lambda h: lambda t: lambda d: LAMBDA_FALSE)(LAMBDA_TRUE)
 
 #list operations
-def LAMBDA_CONCAT(l1):
-    def _LAMBDA_CONCAT(l2):
-        if l2b(LAMBDA_ISEMPTY(l1)):
-            return l2
-        else:
-            return LAMBDA_CONS(LAMBDA_CAR(l1))(LAMBDA_CONCAT(LAMBDA_CDR(l1))(l2))
-    return _LAMBDA_CONCAT
-
+LAMBDA_CONCAT = (lambda r: r(r)) (lambda r: lambda l1: LAMBDA_IF(LAMBDA_ISEMPTY(l1))(lambda l2: l2)((lambda r: lambda l2: LAMBDA_CONS(LAMBDA_CAR(l1))(r(r)(LAMBDA_CDR(l1))(l2)))(r)))
 
 #boolean conversion
 def l2b(l):
