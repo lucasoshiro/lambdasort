@@ -9,7 +9,7 @@ class TestLambdasort(unittest.TestCase):
     def test_sorting(self):
         l = [randint(0, 1000) for i in range(0, 1000)]
         control = sorted(l)
-        l2 = quicksort(l)
+        l2 = quicksort_wrapper(l)
         self.assertEqual(control, l2)
 
     def test_partition(self):
@@ -38,6 +38,18 @@ class TestLambdasort(unittest.TestCase):
         n = 42
         self.assertEqual(l2i(i2l(n)), n)
 
+    def test_LAMBDA_INCREMENT(self):
+        self.assertEqual(l2i(LAMBDA_INCREMENT(LAMBDA_TWO)), 3)
+
+    def test_LAMBDA_DECREMENT(self):
+        self.assertEqual(l2i(LAMBDA_DECREMENT(LAMBDA_TWO)), 1)
+
+    def test_llist2pylist(self):
+        self.assertEqual(llist2pylist([LAMBDA_ZERO, LAMBDA_ONE, LAMBDA_TWO]),
+                         [0, 1, 2])
+
+    def test_pylist2llist(self):
+        self.assertEqual(llist2pylist(pylist2llist([0, 1, 2])), [0, 1, 2])
 
 if __name__ == '__main__':
     unittest.main()
