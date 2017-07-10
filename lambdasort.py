@@ -125,13 +125,13 @@ def partition(A):
         if l2b(LAMBDA_ISEMPTY(S)): return LAMBDA_CONS(L)(R)
 
         def _partition2(x):
-            return (LAMBDA_CONS(x)(L), R) if l2b(LAMBDA_LESS(x)(p)) else (L, LAMBDA_CONS(x)(R))
+            return LAMBDA_CONS(LAMBDA_CONS(x)(L))(R) if l2b(LAMBDA_LESS(x)(p)) else LAMBDA_CONS(L)(LAMBDA_CONS(x)(R))
 
-        nL, nR = _partition2(LAMBDA_CAR(S))
+        LR = _partition2(LAMBDA_CAR(S))
+        nL, nR = LAMBDA_CAR(LR), LAMBDA_CDR(LR)
 
-        S = LAMBDA_CDR(S)
-        return _partition(S, nL, nR)
-
+        return _partition(LAMBDA_CDR(S), nL, nR)
+    
     LR = _partition(S, L, R)
     L, R = LAMBDA_CAR(LR), LAMBDA_CDR(LR)
 
