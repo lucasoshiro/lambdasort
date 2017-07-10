@@ -120,7 +120,8 @@ def partition(A):
     L, R = LAMBDA_EMPTY, LAMBDA_EMPTY
 
     S = LAMBDA_CDR(A)
-    while l2b(LAMBDA_NOT(LAMBDA_ISEMPTY(S))):
+    while True:
+        if l2b(LAMBDA_ISEMPTY(S)): break
         x = LAMBDA_CAR(S)
         if l2b(LAMBDA_LESS(x)(p)):
             L, R = LAMBDA_CONS(x)(L), R
