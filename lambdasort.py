@@ -103,18 +103,23 @@ def concat(A, B):
 
 #quicksort
 def quicksort_wrapper(A):
-    return list(map(l2i, quicksort(list(map(i2l, A)))))
+    church = pl2ll([i2l(x) for x in A])
+    sorted_church = quicksort(church)
+    return [l2i(x) for x in ll2pl(sorted_church)]
 
 def quicksort(A):
-    if len(A) <= 1: return A
-    LR = partition(pl2ll(A))
-    L = ll2pl(LAMBDA_CAR(LR))
-    R = ll2pl(LAMBDA_CDR(LR))
-    p = car(R)
+    if l2b(LAMBDA_ISEMPTY(A)): return A
+    if l2b(LAMBDA_ISEMPTY(LAMBDA_CDR(A))): return A
 
-    L = quicksort(L)
-    R = quicksort(cdr(R))
-    return concat(L, concat([p], R))
+    LR = partition(A)
+    L = LAMBDA_CAR(LR)
+    R = LAMBDA_CDR(LR)
+
+    p = LAMBDA_CAR(R)
+    sL = quicksort(L)
+    sR = quicksort(LAMBDA_CDR(R))
+
+    return LAMBDA_CONCAT(sL)(LAMBDA_CONS(p)(sR))
 
 def partition_wrapper(A):
     B = pl2ll(list(map(i2l, A)))
