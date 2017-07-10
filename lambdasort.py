@@ -115,10 +115,9 @@ def partition(A):
             if l2b(LAMBDA_LESS(x)(p)): return LAMBDA_CONS(LAMBDA_CONS(x)(L))(R)
             else: return LAMBDA_CONS(L)(LAMBDA_CONS(x)(R))
 
-        def _partition3(S, LR, p):
-            return _partition(LAMBDA_CDR(S), LAMBDA_CAR(LR), LAMBDA_CDR(LR), p)
+        _partition3 = lambda S: lambda LR: lambda p: _partition(LAMBDA_CDR(S), LAMBDA_CAR(LR), LAMBDA_CDR(LR), p)
         
-        return _partition3(S, _partition2(LAMBDA_CAR(S), L, R, p), p)
+        return _partition3(S)(_partition2(LAMBDA_CAR(S), L, R, p))(p)
 
     _partition4 = (lambda A: lambda LR: LAMBDA_CONS(LAMBDA_CAR(LR))(LAMBDA_CONS(LAMBDA_CAR(A))(LAMBDA_CDR(LR))))(A)
 
