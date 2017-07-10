@@ -12,7 +12,7 @@ l = [37, 3, 15, 17, 18, 18, 1, 33, 28, 39, 34, 37, 12, 1, 13, 30, 13, 10, 32,
 class TestLambdasort(unittest.TestCase):
     def test_sorting(self):
         control = sorted(l)
-        l2 = quicksort(l)
+        l2 = quicksort_wrapper(l)
         self.assertEqual(control, l2)
 
     def test_partition(self):

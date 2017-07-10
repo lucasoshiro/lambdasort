@@ -93,17 +93,25 @@ def concat(A, B):
     return A + B
 
 #quicksort
+def quicksort_wrapper(A):
+    return list(map(l2i, quicksort(list(map(i2l, A)))))
+
 def quicksort(A):
     if len(A) <= 1: return A
-    L, R = partition_wrapper(A)
+    LR = partition(A)
+    L = LAMBDA_CAR(LR)
+    R = LAMBDA_CDR(LR)
     p = car(R)
+
     L = quicksort(L)
     R = quicksort(cdr(R))
     return concat(L, concat([p], R))
 
 def partition_wrapper(A):
     B = pylist2llist(A)
-    L, R = partition(B)
+    LR = partition(B)
+    L = LAMBDA_CAR(LR)
+    R = LAMBDA_CDR(LR)
     return llist2pylist(L), llist2pylist(R)
 
 def partition(A):
@@ -119,4 +127,4 @@ def partition(A):
 
     L, R = L, cons(p, R)
 
-    return L, R
+    return LAMBDA_CONS(L)(R)
