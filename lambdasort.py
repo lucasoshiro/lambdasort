@@ -54,7 +54,7 @@ def l2i(l):
     return l(lambda x: x + 1)(0)
 
 def i2l(i):
-    l = LAMBDA_ZERO
+    l = (lambda p: lambda x: x)
     for j in range(0, i):
         l = LAMBDA_INCREMENT(l)
 
