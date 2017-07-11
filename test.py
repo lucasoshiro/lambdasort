@@ -16,15 +16,6 @@ class TestLambdasort(unittest.TestCase):
         l2 = quicksort_wrapper(l)
         self.assertEqual(control, l2)
 
-    def test_partition(self):
-        lst = [3, 9, 1, 5, 0, 5, 7, 9, 0, 4]
-        left, right = partition_wrapper(lst)
-        p = right[0]
-        self.assertEqual(list(filter(lambda x: x < p, left)), left)
-        self.assertEqual(list(filter(lambda x: x >= p, right)), right)
-        self.assertEqual(len(left) + len(right), len(lst))
-        self.assertEqual(sorted(left + right), sorted(lst))
-
     def test_l2b(self):
         self.assertEqual(l2b(LAMBDA_TRUE), True)
         self.assertEqual(l2b(LAMBDA_FALSE), False)
@@ -122,17 +113,6 @@ class TestLambdasort(unittest.TestCase):
         self.assertEqual(list(map(l2i, ll2pl(pl2ll(list(map(i2l, [11, 22, 33])))))),
                          [11, 22, 33])
 
-    def test_lliterator(self):
-        l = [11, 22, 33, 44, 55]
-        ll = pl2ll(list(map(i2l, l)))
-        self.assertEqual(list(map(l2i, lliterator(ll))), l)
-
-    def test_llist2pylist(self):
-        self.assertEqual(llist2pylist([LAMBDA_ZERO, LAMBDA_ONE, LAMBDA_TWO]),
-                         [0, 1, 2])
-
-    def test_pylist2llist(self):
-        self.assertEqual(llist2pylist(pylist2llist([0, 1, 2])), [0, 1, 2])
 
 if __name__ == '__main__':
     unittest.main()
