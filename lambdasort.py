@@ -91,11 +91,11 @@ def lliterator(l):
 def quicksort_wrapper(A):
     return list(map(l2i, ll2pl(quicksort(pl2ll(list(map(i2l, A)))))))
 
+_quicksort = lambda A: lambda LR: LAMBDA_IF(LAMBDA_ISEMPTY(quicksort(LAMBDA_CAR(LR))))(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(quicksort(LAMBDA_CDR(LAMBDA_CDR(LR)))))(LAMBDA_CONCAT(quicksort(LAMBDA_CAR(LR)))(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(quicksort(LAMBDA_CDR(LAMBDA_CDR(LR))))))
+
+_quicksort2 = lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(A))(lambda A: A)(lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(LAMBDA_CDR(A)))(A)(_quicksort(A)(partition(A))))
+
 def quicksort(A):
-    _quicksort = lambda A: lambda LR: LAMBDA_IF(LAMBDA_ISEMPTY(quicksort(LAMBDA_CAR(LR))))(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(quicksort(LAMBDA_CDR(LAMBDA_CDR(LR)))))(LAMBDA_CONCAT(quicksort(LAMBDA_CAR(LR)))(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(quicksort(LAMBDA_CDR(LAMBDA_CDR(LR))))))
-
-    _quicksort2 = lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(A))(lambda A: A)(lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(LAMBDA_CDR(A)))(A)(_quicksort(A)(partition(A))))
-
     return _quicksort2(A)(A)
 
 def partition_wrapper(A):
@@ -105,19 +105,18 @@ def partition_wrapper(A):
     R = LAMBDA_CDR(LR)
     return list(map(l2i, ll2pl(L))), list(map(l2i, ll2pl(R)))
 
-def partition(A):
-    _partition2 = lambda x: lambda L: lambda R: lambda p: LAMBDA_IF(LAMBDA_LESS(x)(p))(
+_partition2 = lambda x: lambda L: lambda R: lambda p: LAMBDA_IF(LAMBDA_LESS(x)(p))(
         LAMBDA_CONS(LAMBDA_CONS(x)(L))(R))(
             LAMBDA_CONS(L)(LAMBDA_CONS(x)(R)))
 
-    _partition3 = lambda r: lambda S: lambda LR: lambda p: r(r)(LAMBDA_CDR(S))(LAMBDA_CAR(LR))(LAMBDA_CDR(LR))(p)
-        
-    #def _partition(S):
-    _partition = (lambda r: r(r))(lambda r:
+_partition3 = lambda r: lambda S: lambda LR: lambda p: r(r)(LAMBDA_CDR(S))(LAMBDA_CAR(LR))(LAMBDA_CDR(LR))(p)
+
+_partition = (lambda r: r(r))(lambda r:
                                   lambda S: LAMBDA_IF(LAMBDA_ISEMPTY(S))(
                                       lambda L: lambda R: lambda p: LAMBDA_CONS(L)(R))(
                                           lambda L: lambda R: lambda p: _partition3(r)(S)(_partition2(LAMBDA_CAR(S))(L)(R)(p))(p)))
 
-    _partition4 = (lambda A: lambda LR: LAMBDA_CONS(LAMBDA_CAR(LR))(LAMBDA_CONS(LAMBDA_CAR(A))(LAMBDA_CDR(LR))))(A)
+_partition4 = (lambda A: lambda LR: LAMBDA_CONS(LAMBDA_CAR(LR))(LAMBDA_CONS(LAMBDA_CAR(A))(LAMBDA_CDR(LR))))
 
-    return _partition4(_partition(LAMBDA_CDR(A))(LAMBDA_EMPTY)(LAMBDA_EMPTY)(LAMBDA_CAR(A)))
+def partition(A):
+    return _partition4(A)(_partition(LAMBDA_CDR(A))(LAMBDA_EMPTY)(LAMBDA_EMPTY)(LAMBDA_CAR(A)))
