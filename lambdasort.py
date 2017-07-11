@@ -98,11 +98,11 @@ LAMBDA_EMPTY = (lambda a: lambda b: b)
 LAMBDA_ISEMPTY = lambda l: l(lambda h: lambda t: lambda d: (lambda a: lambda b: b))((lambda a: lambda b: a))
 
 #list operations
-LAMBDA_CONCAT = (lambda r: r(r)) (lambda r: lambda l1: (lambda c: lambda t: lambda e: c(t)(e))(LAMBDA_ISEMPTY(l1))(lambda l2: l2)((lambda r: lambda l2: (lambda a: lambda b: lambda l: l(a)(b))((lambda p: p(lambda a: lambda b: a))(l1))(r(r)((lambda p: p(lambda a: lambda b: b))(l1))(l2)))(r)))
+LAMBDA_CONCAT = (lambda r: r(r)) (lambda r: lambda l1: (lambda c: lambda t: lambda e: c(t)(e))((lambda l: l(lambda h: lambda t: lambda d: (lambda a: lambda b: b))((lambda a: lambda b: a)))(l1))(lambda l2: l2)((lambda r: lambda l2: (lambda a: lambda b: lambda l: l(a)(b))((lambda p: p(lambda a: lambda b: a))(l1))(r(r)((lambda p: p(lambda a: lambda b: b))(l1))(l2)))(r)))
 
 _quicksort = lambda r: lambda A: lambda LR: LAMBDA_CONCAT(r(r)((lambda p: p(lambda a: lambda b: a))(LR)))((lambda a: lambda b: lambda l: l(a)(b))((lambda p: p(lambda a: lambda b: a))((lambda p: p(lambda a: lambda b: b))(LR)))(r(r)((lambda p: p(lambda a: lambda b: b))((lambda p: p(lambda a: lambda b: b))(LR)))))
 
-_quicksort2 = lambda r: lambda A: (lambda c: lambda t: lambda e: c(t)(e))(LAMBDA_ISEMPTY(A))(lambda A: A)(lambda A: (lambda c: lambda t: lambda e: c(t)(e))(LAMBDA_ISEMPTY((lambda p: p(lambda a: lambda b: b))(A)))(A)(_quicksort(r)(A)(partition(A))))
+_quicksort2 = lambda r: lambda A: (lambda c: lambda t: lambda e: c(t)(e))((lambda l: l(lambda h: lambda t: lambda d: (lambda a: lambda b: b))((lambda a: lambda b: a)))(A))(lambda A: A)(lambda A: (lambda c: lambda t: lambda e: c(t)(e))((lambda l: l(lambda h: lambda t: lambda d: (lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda p: p(lambda a: lambda b: b))(A)))(A)(_quicksort(r)(A)(partition(A))))
 
 quicksort = (lambda r: r(r))(lambda r: lambda A: _quicksort2(r)(A)(A))
 
@@ -110,8 +110,8 @@ _partition2 = lambda x: lambda L: lambda R: lambda p: (lambda c: lambda t: lambd
 
 _partition3 = lambda r: lambda S: lambda LR: lambda p: r(r)((lambda p: p(lambda a: lambda b: b))(S))((lambda p: p(lambda a: lambda b: a))(LR))((lambda p: p(lambda a: lambda b: b))(LR))(p)
 
-_partition = (lambda r: r(r))(lambda r: lambda S: (lambda c: lambda t: lambda e: c(t)(e))(LAMBDA_ISEMPTY(S))(lambda L: lambda R: lambda p: (lambda a: lambda b: lambda l: l(a)(b))(L)(R))( lambda L: lambda R: lambda p: _partition3(r)(S)(_partition2((lambda p: p(lambda a: lambda b: a))(S))(L)(R)(p))(p)))
+_partition = (lambda r: r(r))(lambda r: lambda S: (lambda c: lambda t: lambda e: c(t)(e))((lambda l: l(lambda h: lambda t: lambda d: (lambda a: lambda b: b))((lambda a: lambda b: a)))(S))(lambda L: lambda R: lambda p: (lambda a: lambda b: lambda l: l(a)(b))(L)(R))(lambda L: lambda R: lambda p: _partition3(r)(S)(_partition2((lambda p: p(lambda a: lambda b: a))(S))(L)(R)(p))(p)))
 
 _partition4 = (lambda A: lambda LR: (lambda a: lambda b: lambda l: l(a)(b))((lambda p: p(lambda a: lambda b: a))(LR))((lambda a: lambda b: lambda l: l(a)(b))((lambda p: p(lambda a: lambda b: a))(A))((lambda p: p(lambda a: lambda b: b))(LR))))
 
-partition = lambda A:_partition4(A)(_partition((lambda p: p(lambda a: lambda b: b))(A))(LAMBDA_EMPTY)(LAMBDA_EMPTY)((lambda p: p(lambda a: lambda b: a))(A)))
+partition = lambda A:_partition4(A)(_partition((lambda p: p(lambda a: lambda b: b))(A))((lambda a: lambda b: b))((lambda a: lambda b: b))((lambda p: p(lambda a: lambda b: a))(A)))
