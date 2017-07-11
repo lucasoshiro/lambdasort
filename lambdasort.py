@@ -40,7 +40,7 @@ LAMBDA_EMPTY = (lambda a: lambda b: b)
 LAMBDA_ISEMPTY = lambda l: l(lambda h: lambda t: lambda d: (lambda a: lambda b: b))((lambda a: lambda b: a))
 
 #list operations
-LAMBDA_CONCAT = (lambda r: r(r)) (lambda r: lambda l1: LAMBDA_IF(LAMBDA_ISEMPTY(l1))(lambda l2: l2)((lambda r: lambda l2: LAMBDA_CONS(LAMBDA_CAR(l1))(r(r)(LAMBDA_CDR(l1))(l2)))(r)))
+LAMBDA_CONCAT = (lambda r: r(r)) (lambda r: lambda l1: (lambda c: lambda t: lambda e: c(t)(e))(LAMBDA_ISEMPTY(l1))(lambda l2: l2)((lambda r: lambda l2: LAMBDA_CONS(LAMBDA_CAR(l1))(r(r)(LAMBDA_CDR(l1))(l2)))(r)))
 
 #boolean conversion
 def l2b(l):
@@ -96,7 +96,7 @@ def quicksort_wrapper(A):
 
 _quicksort = lambda r: lambda A: lambda LR: LAMBDA_CONCAT(r(r)(LAMBDA_CAR(LR)))(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(r(r)(LAMBDA_CDR(LAMBDA_CDR(LR)))))
 
-_quicksort2 = lambda r: lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(A))(lambda A: A)(lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(LAMBDA_CDR(A)))(A)(_quicksort(r)(A)(partition(A))))
+_quicksort2 = lambda r: lambda A: (lambda c: lambda t: lambda e: c(t)(e))(LAMBDA_ISEMPTY(A))(lambda A: A)(lambda A: (lambda c: lambda t: lambda e: c(t)(e))(LAMBDA_ISEMPTY(LAMBDA_CDR(A)))(A)(_quicksort(r)(A)(partition(A))))
 
 quicksort = (lambda r: r(r))(lambda r: lambda A: _quicksort2(r)(A)(A))
 
@@ -107,11 +107,11 @@ def partition_wrapper(A):
     R = LAMBDA_CDR(LR)
     return list(map(l2i, ll2pl(L))), list(map(l2i, ll2pl(R)))
 
-_partition2 = lambda x: lambda L: lambda R: lambda p: LAMBDA_IF(LAMBDA_LESS(x)(p))(LAMBDA_CONS(LAMBDA_CONS(x)(L))(R))(LAMBDA_CONS(L)(LAMBDA_CONS(x)(R)))
+_partition2 = lambda x: lambda L: lambda R: lambda p: (lambda c: lambda t: lambda e: c(t)(e))(LAMBDA_LESS(x)(p))(LAMBDA_CONS(LAMBDA_CONS(x)(L))(R))(LAMBDA_CONS(L)(LAMBDA_CONS(x)(R)))
 
 _partition3 = lambda r: lambda S: lambda LR: lambda p: r(r)(LAMBDA_CDR(S))(LAMBDA_CAR(LR))(LAMBDA_CDR(LR))(p)
 
-_partition = (lambda r: r(r))(lambda r: lambda S: LAMBDA_IF(LAMBDA_ISEMPTY(S))(lambda L: lambda R: lambda p: LAMBDA_CONS(L)(R))(lambda L: lambda R: lambda p: _partition3(r)(S)(_partition2(LAMBDA_CAR(S))(L)(R)(p))(p)))
+_partition = (lambda r: r(r))(lambda r: lambda S: (lambda c: lambda t: lambda e: c(t)(e))(LAMBDA_ISEMPTY(S))(lambda L: lambda R: lambda p: LAMBDA_CONS(L)(R))(lambda L: lambda R: lambda p: _partition3(r)(S)(_partition2(LAMBDA_CAR(S))(L)(R)(p))(p)))
 
 _partition4 = (lambda A: lambda LR: LAMBDA_CONS(LAMBDA_CAR(LR))(LAMBDA_CONS(LAMBDA_CAR(A))(LAMBDA_CDR(LR))))
 
