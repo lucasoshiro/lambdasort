@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from consts import *
+
 #boolean conversion
 def l2b(l):
     return l(True)(False)
@@ -58,47 +60,6 @@ def partition_wrapper(A):
     L = LAMBDA_CAR(LR)
     R = LAMBDA_CDR(LR)
     return list(map(l2i, ll2pl(L))), list(map(l2i, ll2pl(R)))
-
-#boolean constants
-LAMBDA_TRUE = lambda a: lambda b: a
-LAMBDA_FALSE = lambda a: lambda b: b
-
-#boolean opearations
-LAMBDA_OR = lambda a: lambda b: a((lambda a: lambda b: a))(b)
-LAMBDA_AND = lambda a: lambda b: a(b)((lambda a: lambda b: b))
-LAMBDA_NOT = lambda a: a((lambda a: lambda b: b))((lambda a: lambda b: a))
-
-#if
-LAMBDA_IF = lambda c: lambda t: lambda e: c(t)(e)
-
-#integer constants
-LAMBDA_ZERO = lambda p: lambda x: x
-LAMBDA_ONE = lambda p: lambda x: p(x)
-LAMBDA_TWO = lambda p: lambda x: p(p(x))
-
-#integer operations
-LAMBDA_INCREMENT = lambda l: lambda p: lambda x: p(l(p)(x))
-LAMBDA_DECREMENT = lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)
-LAMBDA_ADD = lambda m: lambda n: n((lambda l: lambda p: lambda x: p(l(p)(x))))(m)
-LAMBDA_SUB = lambda m: lambda n: n((lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)))(m)
-
-#comparators
-LAMBDA_EQZ = lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a))
-LAMBDA_LEQ = lambda m: lambda n: (lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: n((lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)))(m))(m)(n))
-LAMBDA_EQ = lambda m: lambda n: (lambda a: lambda b: a(b)((lambda a: lambda b: b)))((lambda m: lambda n: (lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: n((lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)))(m))(m)(n)))(m)(n))((lambda m: lambda n: (lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: n((lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)))(m))(m)(n)))(n)(m))
-LAMBDA_LESS = lambda m: lambda n: (lambda a: lambda b: a(b)((lambda a: lambda b: b)))((lambda m: lambda n: (lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: n((lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)))(m))(m)(n)))(m)(n))((lambda a: a((lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: (lambda a: lambda b: a(b)((lambda a: lambda b: b)))((lambda m: lambda n: (lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: n((lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)))(m))(m)(n)))(m)(n))((lambda m: lambda n: (lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: n((lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)))(m))(m)(n)))(n)(m)))(m)(n)))
-
-#pair operations
-LAMBDA_CONS = lambda a: lambda b: lambda l: l(a)(b)
-LAMBDA_CAR = lambda p: p(lambda a: lambda b: a)
-LAMBDA_CDR = lambda p: p(lambda a: lambda b: b)
-
-#list constants
-LAMBDA_EMPTY = (lambda a: lambda b: b)
-LAMBDA_ISEMPTY = lambda l: l(lambda h: lambda t: lambda d: (lambda a: lambda b: b))((lambda a: lambda b: a))
-
-#list operations
-LAMBDA_CONCAT = (lambda r: r(r)) (lambda r: lambda l1: (lambda c: lambda t: lambda e: c(t)(e))((lambda l: l(lambda h: lambda t: lambda d: (lambda a: lambda b: b))((lambda a: lambda b: a)))(l1))(lambda l2: l2)((lambda r: lambda l2: (lambda a: lambda b: lambda l: l(a)(b))((lambda p: p(lambda a: lambda b: a))(l1))(r(r)((lambda p: p(lambda a: lambda b: b))(l1))(l2)))(r)))
 
 _partition2 = lambda x: lambda L: lambda R: lambda p: (lambda c: lambda t: lambda e: c(t)(e))((lambda m: lambda n: (lambda a: lambda b: a(b)((lambda a: lambda b: b)))((lambda m: lambda n: (lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: n((lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)))(m))(m)(n)))(m)(n))((lambda a: a((lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: (lambda a: lambda b: a(b)((lambda a: lambda b: b)))((lambda m: lambda n: (lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: n((lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)))(m))(m)(n)))(m)(n))((lambda m: lambda n: (lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a)))((lambda m: lambda n: n((lambda n: lambda f: lambda x: n(lambda g: lambda h: h(g(f)))(lambda y: x)(lambda y: y)))(m))(m)(n)))(n)(m)))(m)(n))))(x)(p))((lambda a: lambda b: lambda l: l(a)(b))((lambda a: lambda b: lambda l: l(a)(b))(x)(L))(R))((lambda a: lambda b: lambda l: l(a)(b))(L)((lambda a: lambda b: lambda l: l(a)(b))(x)(R)))
 

@@ -2,6 +2,7 @@
 
 import unittest
 from lambdasort import *
+from consts import *
 from random import randint
 from functools import reduce
 
