@@ -114,8 +114,7 @@ def partition(A):
 
     _partition3 = lambda S: lambda LR: lambda p: _partition(LAMBDA_CDR(S))(LAMBDA_CAR(LR))(LAMBDA_CDR(LR))(p)
         
-    def _partition(S):
-        return LAMBDA_IF(LAMBDA_ISEMPTY(S))(lambda L: lambda R: lambda p: LAMBDA_CONS(L)(R))(lambda L: lambda R: lambda p:_partition3(S)(_partition2(LAMBDA_CAR(S))(L)(R)(p))(p))
+    _partition = (lambda S: LAMBDA_IF(LAMBDA_ISEMPTY(S))(lambda L: lambda R: lambda p: LAMBDA_CONS(L)(R))(lambda L: lambda R: lambda p: _partition3(S)(_partition2(LAMBDA_CAR(S))(L)(R)(p))(p)))
 
     _partition4 = (lambda A: lambda LR: LAMBDA_CONS(LAMBDA_CAR(LR))(LAMBDA_CONS(LAMBDA_CAR(A))(LAMBDA_CDR(LR))))(A)
 
