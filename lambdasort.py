@@ -27,8 +27,8 @@ LAMBDA_SUB = lambda m: lambda n: n(LAMBDA_DECREMENT)(m)
 #comparators
 LAMBDA_EQZ = lambda n: n(lambda x: (lambda a: lambda b: b))((lambda a: lambda b: a))
 LAMBDA_LEQ = lambda m: lambda n: LAMBDA_EQZ(LAMBDA_SUB(m)(n))
-LAMBDA_EQ = lambda m: lambda n: LAMBDA_AND(LAMBDA_LEQ(m)(n))(LAMBDA_LEQ(n)(m))
-LAMBDA_LESS = lambda m: lambda n: LAMBDA_AND(LAMBDA_LEQ(m)(n))(LAMBDA_NOT(LAMBDA_EQ(m)(n)))
+LAMBDA_EQ = lambda m: lambda n: (lambda a: lambda b: a(b)((lambda a: lambda b: b)))(LAMBDA_LEQ(m)(n))(LAMBDA_LEQ(n)(m))
+LAMBDA_LESS = lambda m: lambda n: (lambda a: lambda b: a(b)((lambda a: lambda b: b)))(LAMBDA_LEQ(m)(n))((lambda a: a((lambda a: lambda b: b))((lambda a: lambda b: a)))(LAMBDA_EQ(m)(n)))
 
 #pair operations
 LAMBDA_CONS = lambda a: lambda b: lambda l: l(a)(b)
