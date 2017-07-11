@@ -101,8 +101,7 @@ def quicksort(A):
         l1 = (lambda A: A)
         l2 = (lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(LAMBDA_CDR(A)))(A)(_quicksort(A)(partition(A))))
 
-        if l2b(LAMBDA_ISEMPTY(A)): return l1
-        else: return l2
+        return LAMBDA_IF(LAMBDA_ISEMPTY(A))(l1)(l2)
 
     return _quicksort2(A)(A)
 
