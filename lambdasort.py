@@ -94,11 +94,11 @@ def quicksort_wrapper(A):
     sorted_church = quicksort(church)
     return [l2i(x) for x in ll2pl(sorted_church)]
 
-_quicksort = lambda A: lambda LR: LAMBDA_CONCAT(quicksort(LAMBDA_CAR(LR)))(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(quicksort(LAMBDA_CDR(LAMBDA_CDR(LR)))))
+_quicksort = lambda r: lambda A: lambda LR: LAMBDA_CONCAT(r(r)(LAMBDA_CAR(LR)))(LAMBDA_CONS(LAMBDA_CAR(LAMBDA_CDR(LR)))(r(r)(LAMBDA_CDR(LAMBDA_CDR(LR)))))
 
-_quicksort2 = lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(A))(lambda A: A)(lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(LAMBDA_CDR(A)))(A)(_quicksort(A)(partition(A))))
+_quicksort2 = lambda r: lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(A))(lambda A: A)(lambda A: LAMBDA_IF(LAMBDA_ISEMPTY(LAMBDA_CDR(A)))(A)(_quicksort(r)(A)(partition(A))))
 
-quicksort = lambda A: _quicksort2(A)(A)
+quicksort = (lambda r: r(r))(lambda r: lambda A: _quicksort2(r)(A)(A))
 
 def partition_wrapper(A):
     B = pl2ll(list(map(i2l, A)))
