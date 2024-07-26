@@ -137,7 +137,7 @@ data** using only functions. The types here are:
 - pairs (used by the functions that return more than one value)
 - booleans (used by the verifications)
 
-Luckly, the creator of lambda calculus, **Alonzo Church** has also shown us how
+Luckily, the creator of lambda calculus, **Alonzo Church** has also shown us how
 to do that. There's an [article about it](https://en.wikipedia.org/wiki/Church_encoding)
 on Wikipedia.
 
@@ -229,7 +229,7 @@ You can see it [here](https://github.com/lucasoshiro/lambdasort/blob/booleans/la
 
 ### Integers
 
-**Chuch numerals** are defined as:
+**Church numerals** are defined as:
 
 ~~~python
 LAMBDA_ZERO = lambda p: lambda x: x
@@ -353,7 +353,7 @@ def pylist2llist(L):
 #### Using Church numbers
 
 As we can convert Python integer lists into Church number lists and vice-versa
-and we can compare Chuch numbers, we can apply the first change to Quicksort:
+and we can compare Church numbers, we can apply the first change to Quicksort:
 
 ~~~python
 def quicksort(A):
@@ -529,7 +529,7 @@ As `partition` returns two values (a Python tuple), we can use here a Church pai
 #### Using Church lists in `partition`
 
 Let's use Church lists in quicksort! First of all, we're going to convert
-`partition` to operate over Chuch lists. Currently, our situation is this:
+`partition` to operate over Church lists. Currently, our situation is this:
 
 ~~~python
 def partition(A):
